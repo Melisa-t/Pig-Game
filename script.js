@@ -11,6 +11,12 @@ const game = {
       const currentPlayer = this.getCurrentPlayer();
       const currentScore = Math.trunc(Math.random() * 6 + 1);
       console.log("Before change", currentScore);
+
+    //   for (let i = 0; i < currentScore; i++) {
+    //     const dice = document.querySelector(`.dice`)
+    //     const diceDiv = document.createElement("div");
+    //     dice.appendChild(diceDiv);
+    // }
   
       if (currentScore === 1) {
         currentPlayer.score = 0;
@@ -55,7 +61,8 @@ const game = {
           console.log(`${!currentPlayer ? `player1` : `player2`}`);
       } 
     },
-  
+    
+
     playerOne: {
       totalScore: 0,
       score: 0,
