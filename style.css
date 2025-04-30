@@ -147,3 +147,7 @@ body {
   background-color: var(--darkest-color);
   color: var(--mid-color);
 }
+
+.hidden{
+  display: none;
+}
