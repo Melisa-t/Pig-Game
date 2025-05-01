@@ -12,16 +12,16 @@ const game = {
     const currentScore = Math.trunc(Math.random() * 6 + 1);
     console.log("Before change", currentScore);
 
-    const dice = document.querySelector(`.dice`);
-    console.log(dice.children);
+    // const dice = document.querySelector(`.dice`);
+    // console.log(dice.children);
 
     //i need to reset dice every time except the first time
     // when roll is called. if children none dont call the method. reset dice.
 
-    for (let i = 0; i < currentScore; i++) {
-      const diceDiv = document.createElement("div");
-      dice.appendChild(diceDiv);
-    }
+    // for (let i = 0; i < currentScore; i++) {
+    //   const diceDiv = document.createElement("div");
+    //   dice.appendChild(diceDiv);
+    // }
 
     if (currentScore === 1) {
       currentPlayer.score = 0;
