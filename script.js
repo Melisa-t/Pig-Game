@@ -57,6 +57,10 @@ const game = {
       this.changeTextContent();
       this.changeTurnStyle();
       this.isPlayersTurn = !this.isPlayersTurn;
+      this.changeTurnStyle();
+      while (dice.firstChild) {
+        dice.removeChild(dice.firstChild);
+      }
     } else {
       currentPlayer.score += currentScore;
       this.changeTextContent();
@@ -70,11 +74,14 @@ const game = {
       alert(`Please roll first!`);
     } else {
       currentPlayer.totalScore += currentPlayer.score;
-      this.changeTextContent();
       this.playerOne.score = 0;
       this.playerTwo.score = 0;
+      this.changeTextContent();
       this.isPlayersTurn = !this.isPlayersTurn;
       this.changeTurnStyle();
+      while (dice.firstChild) {
+        dice.removeChild(dice.firstChild);
+      }
     }
   },
 
@@ -105,7 +112,7 @@ const game = {
     const midContainer = document.querySelector(`.mid-container`);
     const currentPlayer = this.getCurrentPlayer();
 
-    if (currentPlayer.totalScore + currentPlayer.score >= 10) {
+    if (currentPlayer.totalScore + currentPlayer.score >= 100) {
       currentPlayer.totalScore += currentPlayer.score;
       this.changeTextContent();
       this.winner = currentPlayer;
