@@ -8,7 +8,7 @@ const game = {
   },
 
   createDice: function (score) {
-    dice.style.display = `flex`
+    dice.style.display = `flex`;
     if (dice.hasChildNodes()) {
       const childrenLen = dice.children.length;
       while (dice.firstChild) {
@@ -29,14 +29,11 @@ const game = {
   changeTurnStyle: function () {
     const currentPlayer = this.getCurrentPlayer();
     if (currentPlayer === this.playerOne) {
-      console.log(`player 1 playin`);
       playerOneContainer.style.opacity = `100%`;
       playerOneContainer.style.transition = `1s`;
       playerTwoContainer.style.opacity = `50%`;
       playerTwoContainer.style.transition = `1s`;
     } else {
-      console.log(`player 2 playin`);
-
       playerTwoContainer.style.opacity = `100%`;
       playerTwoContainer.style.transition = `1s`;
       playerOneContainer.style.opacity = `50%`;
@@ -82,6 +79,7 @@ const game = {
   },
 
   reset: function () {
+    dice.style.display = `flex`;
     const midContainer = document.querySelector(`.mid-container`);
     this.playerOne.totalScore = 0;
     this.playerTwo.totalScore = 0;

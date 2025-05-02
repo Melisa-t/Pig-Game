@@ -10,6 +10,7 @@
   --light-color: #94b4c1;
   --lightest-color: #547792;
   --shadow-color: #c2d1dd;
+  --darkest-shadow-color: #2d4661;
 }
 
 html {
@@ -88,7 +89,23 @@ body {
   margin-bottom: 2em;
 }
 
-.new-game-btn,
+.new-game-btn{
+  width: 8em;
+  height: 3em;
+  background-color: var(--darkest-color);
+  color:white;
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  position: relative;
+  margin-bottom: 2em;
+  z-index: 100000;
+  font-weight: bold;
+  transition: 0.15s;
+}
+
 .roll-dice-btn,
 .hold-btn {
   width: 8em;
@@ -149,14 +166,22 @@ body {
   font-weight: bold;
 }
 
-.new-game-btn:hover,
+.new-game-btn:hover{
+  cursor: pointer;
+  background-color: var(--darkest-shadow-color);
+}
+
 .roll-dice-btn:hover,
 .hold-btn:hover {
   cursor: pointer;
   background-color: var(--shadow-color);
 }
 
-.new-game-btn:active,
+.new-game-btn:active{
+  color: var(--darkest-color);
+  background-color: var(--mid-color);
+}
+
 .roll-dice-btn:active,
 .hold-btn:active {
   background-color: var(--darkest-color);
