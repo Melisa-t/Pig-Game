@@ -94,7 +94,7 @@ const game = {
     const midContainer = document.querySelector(`.mid-container`);
     const currentPlayer = this.getCurrentPlayer();
 
-    if (currentPlayer.totalScore + currentPlayer.score >= 100) {
+    if (currentPlayer.totalScore + currentPlayer.score >= 10) {
       currentPlayer.totalScore += currentPlayer.score;
       this.changeTextContent();
       this.winner = currentPlayer;
@@ -149,9 +149,12 @@ const modal = document.getElementById("myModal");
 const closeBtn = document.getElementsByClassName("close")[0];
 
 const showModal = function (player) {
+  closeModal()
   modal.style.display = "block";
-  const modalP = document.querySelector(`.modal-content p`);
-  const modalText = document.createTextNode(`${player} won!`);
+  const modalP = document.querySelector(
+    `.modal-content > .modal-text-container > p`
+  );
+  const modalText = document.createTextNode(`${player} won! 🎉`);
   modalP.appendChild(modalText);
 };
 
