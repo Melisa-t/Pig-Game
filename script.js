@@ -12,7 +12,7 @@ const game = {
     //i need to reset dice every time except the first time
     // when roll is called. if children none dont call the method.
     // reset dice.
-    
+
     // if (dice.hasChildNodes()) {
     //   console.log(score);
     //   console.log(dice.childNodes);
@@ -72,25 +72,24 @@ const game = {
   },
 
   reset: function () {
-    const midContainer = document.querySelector(`.mid-container`)
+    const midContainer = document.querySelector(`.mid-container`);
     this.playerOne.totalScore = 0;
     this.playerTwo.totalScore = 0;
     this.playerOne.score = 0;
     this.playerTwo.score = 0;
     this.isPlayersTurn = false;
-    midContainer.style.display = `flex`
+    midContainer.style.display = `flex`;
   },
 
   winCheck: function () {
-    const midContainer = document.querySelector(`.mid-container`)
+    const midContainer = document.querySelector(`.mid-container`);
     const currentPlayer = this.getCurrentPlayer();
     const currentTotalScore = currentPlayer.totalScore + currentPlayer.score;
     if (currentTotalScore >= 12) {
       this.winner = currentPlayer;
       !currentPlayer ? `player1` : `player2`;
       console.log(`${!currentPlayer ? `player1` : `player2`}`);
-      midContainer.style.display = `none`
-      resetBtn.style.display=`flex`
+      midContainer.style.display = `none`;
     }
   },
 
