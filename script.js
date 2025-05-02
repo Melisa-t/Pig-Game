@@ -58,9 +58,6 @@ const game = {
       this.changeTurnStyle();
       this.isPlayersTurn = !this.isPlayersTurn;
       this.changeTurnStyle();
-      while (dice.firstChild) {
-        dice.removeChild(dice.firstChild);
-      }
     } else {
       currentPlayer.score += currentScore;
       this.changeTextContent();
@@ -112,7 +109,7 @@ const game = {
     const midContainer = document.querySelector(`.mid-container`);
     const currentPlayer = this.getCurrentPlayer();
 
-    if (currentPlayer.totalScore + currentPlayer.score >= 100) {
+    if (currentPlayer.totalScore + currentPlayer.score >= 10) {
       currentPlayer.totalScore += currentPlayer.score;
       this.changeTextContent();
       this.winner = currentPlayer;
