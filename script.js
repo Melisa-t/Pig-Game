@@ -9,12 +9,7 @@ const game = {
 
   createDice: function (score) {
     const dice = document.querySelector(`.dice`);
-    // i need to reset dice every time except the first time
-    // when roll is called. if children none dont call the method.
-    // reset dice.
-
     if (dice.hasChildNodes()) {
-
       const childrenLen = dice.children.length;
       while (dice.firstChild) {
         dice.removeChild(dice.firstChild);
@@ -27,7 +22,6 @@ const game = {
       for (let i = 0; i < score; i++) {
         const diceDiv = document.createElement("div");
         dice.appendChild(diceDiv);
-
       }
     }
   },
@@ -82,17 +76,20 @@ const game = {
       this.changeTextContent();
       this.winner = currentPlayer;
       midContainer.style.display = `none`;
+      showModal(currentPlayer.name);
     }
   },
 
   playerOne: {
     totalScore: 0,
     score: 0,
+    name: `First Player`,
   },
 
   playerTwo: {
     totalScore: 0,
     score: 0,
+    name: `Second Player`,
   },
 };
 
@@ -118,4 +115,30 @@ const resetBtn = document.querySelector(`.new-game-btn`);
 
 resetBtn.addEventListener(`click`, () => {
   game.reset();
+  closeModal()
 });
+
+const modal = document.getElementById("myModal");
+const closeBtn = document.getElementsByClassName("close")[0];
+
+const showModal = function (player) {
+  modal.style.display = "block";
+  const modalP = document.querySelector(`.modal-content p`);
+  const modalText = document.createTextNode(`${player} won!`);
+  modalP.appendChild(modalText);
+};
+
+const closeModal = function () {
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+  };
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+}
+
+
+
+
