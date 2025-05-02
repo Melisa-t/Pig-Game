@@ -30,10 +30,18 @@ body {
   align-items: center;
 }
 
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .player1,
 .player2 {
-  width: 30%;
-  padding: 5em;
+  width: 100%;
+  padding: 8em;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -120,7 +128,14 @@ body {
   background-color: rgb(0, 0, 0);
 }
 
-.mid-container {
+.mid-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.mid-overlay {
   position: absolute;
   display: flex;
   flex-direction: column;
