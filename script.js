@@ -47,10 +47,12 @@ const game = {
     // game.createDice(currentScore);
     if (currentScore === 1) {
       currentPlayer.score = 0;
+      this.changeTextContent();
       this.isPlayersTurn = !this.isPlayersTurn;
       console.log("Score reset", this.isPlayersTurn);
     } else {
       currentPlayer.score += currentScore;
+      this.changeTextContent();
       console.log(
         "currentPlayer.score",
         this.isPlayersTurn,
@@ -62,6 +64,9 @@ const game = {
   hold: function () {
     const currentPlayer = this.getCurrentPlayer();
     currentPlayer.totalScore += currentPlayer.score;
+    this.changeTextContent();
+    this.playerOne.score = 0;
+    this.playerTwo.score = 0;
     console.log(
       `hold`,
       currentPlayer.totalScore,
@@ -77,17 +82,27 @@ const game = {
     this.playerTwo.totalScore = 0;
     this.playerOne.score = 0;
     this.playerTwo.score = 0;
+    this.changeTextContent();
     this.isPlayersTurn = false;
     midContainer.style.display = `flex`;
+  },
+
+  changeTextContent: function () {
+    p1TotalScore.textContent = this.playerOne.totalScore;
+    p2TotalScore.textContent = this.playerTwo.totalScore;
+    p1Score.textContent = this.playerOne.score;
+    p2Score.textContent = this.playerTwo.score;
   },
 
   winCheck: function () {
     const midContainer = document.querySelector(`.mid-container`);
     const currentPlayer = this.getCurrentPlayer();
-    const currentTotalScore = currentPlayer.totalScore + currentPlayer.score;
-    if (currentTotalScore >= 12) {
+
+    if ((currentPlayer.totalScore += currentPlayer.score >= 12)) {
+      console.log(currentPlayer.totalScore);
+      console.log(`should be ova`);
+      currentPlayer.totalScore += currentPlayer.score;
       this.winner = currentPlayer;
-      !currentPlayer ? `player1` : `player2`;
       console.log(`${!currentPlayer ? `player1` : `player2`}`);
       midContainer.style.display = `none`;
     }
@@ -105,6 +120,10 @@ const game = {
 };
 
 const rollDice = document.querySelector(`.roll-dice-btn`);
+let p1TotalScore = document.querySelector(`.p1-total-score`);
+let p2TotalScore = document.querySelector(`.p2-total-score`);
+let p1Score = document.querySelector(`.p1-current-score`);
+let p2Score = document.querySelector(`.p2-current-score`);
 
 rollDice.addEventListener(`click`, () => {
   game.roll();
