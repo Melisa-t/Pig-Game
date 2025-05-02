@@ -25,6 +25,28 @@ const game = {
       }
     }
   },
+
+  changeTurnStyle: function () {
+    const currentPlayer = this.getCurrentPlayer();
+    if (currentPlayer === this.playerOne) {
+      playerOneContainer.style.opacity = `100%`;
+      playerOneContainer.style.transition = `1s`;
+      playerTwoContainer.style.opacity = `50%`;
+      playerTwoContainer.style.transition = `1s`;
+    } else {
+      playerTwoContainer.style.opacity = `100%`;
+      playerTwoContainer.style.transition = `1s`;
+      playerOneContainer.style.opacity = `50%`;
+      playerOneContainer.style.transition = `1s`;
+    }
+  },
+  resetStyle: function () {
+    playerOneContainer.style.opacity = `100`;
+    playerOneContainer.style.transition = `1s`;
+    playerTwoContainer.style.opacity = `100`;
+    playerTwoContainer.style.transition = `1s`;
+  },
+
   roll: function () {
     const currentPlayer = this.getCurrentPlayer();
     const currentScore = Math.trunc(Math.random() * 6 + 1);
@@ -58,6 +80,7 @@ const game = {
     this.changeTextContent();
     this.isPlayersTurn = false;
     midContainer.style.display = `flex`;
+    this.resetStyle();
   },
 
   changeTextContent: function () {
@@ -71,7 +94,7 @@ const game = {
     const midContainer = document.querySelector(`.mid-container`);
     const currentPlayer = this.getCurrentPlayer();
 
-    if (currentPlayer.totalScore + currentPlayer.score >= 20) {
+    if (currentPlayer.totalScore + currentPlayer.score >= 100) {
       currentPlayer.totalScore += currentPlayer.score;
       this.changeTextContent();
       this.winner = currentPlayer;
@@ -98,8 +121,11 @@ let p1TotalScore = document.querySelector(`.p1-total-score`);
 let p2TotalScore = document.querySelector(`.p2-total-score`);
 let p1Score = document.querySelector(`.p1-current-score`);
 let p2Score = document.querySelector(`.p2-current-score`);
+const playerOneContainer = document.querySelector(`.player1`);
+const playerTwoContainer = document.querySelector(`.player2`);
 
 rollDice.addEventListener(`click`, () => {
+  game.changeTurnStyle();
   game.roll();
   game.winCheck();
 });
@@ -107,6 +133,7 @@ rollDice.addEventListener(`click`, () => {
 const holdBtn = document.querySelector(`.hold-btn`);
 
 holdBtn.addEventListener(`click`, () => {
+  game.changeTurnStyle();
   game.hold();
   game.winCheck();
 });
@@ -115,7 +142,7 @@ const resetBtn = document.querySelector(`.new-game-btn`);
 
 resetBtn.addEventListener(`click`, () => {
   game.reset();
-  closeModal()
+  closeModal();
 });
 
 const modal = document.getElementById("myModal");
@@ -137,8 +164,4 @@ const closeModal = function () {
       modal.style.display = "none";
     }
   };
-}
-
-
-
-
+};
