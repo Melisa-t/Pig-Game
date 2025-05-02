@@ -79,7 +79,7 @@ const game = {
   },
 
   reset: function () {
-    dice.style.display = `flex`;
+    dice.style.display = `none`;
     const midContainer = document.querySelector(`.mid-container`);
     this.playerOne.totalScore = 0;
     this.playerTwo.totalScore = 0;
