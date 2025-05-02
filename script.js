@@ -8,7 +8,6 @@ const game = {
   },
 
   createDice: function (score) {
-    const dice = document.querySelector(`.dice`);
     if (dice.hasChildNodes()) {
       const childrenLen = dice.children.length;
       while (dice.firstChild) {
@@ -29,11 +28,14 @@ const game = {
   changeTurnStyle: function () {
     const currentPlayer = this.getCurrentPlayer();
     if (currentPlayer === this.playerOne) {
+      console.log(`player 1 playin`);
       playerOneContainer.style.opacity = `100%`;
       playerOneContainer.style.transition = `1s`;
       playerTwoContainer.style.opacity = `50%`;
       playerTwoContainer.style.transition = `1s`;
     } else {
+      console.log(`player 2 playin`);
+
       playerTwoContainer.style.opacity = `100%`;
       playerTwoContainer.style.transition = `1s`;
       playerOneContainer.style.opacity = `50%`;
@@ -55,20 +57,27 @@ const game = {
     if (currentScore === 1) {
       currentPlayer.score = 0;
       this.changeTextContent();
+      this.changeTurnStyle();
       this.isPlayersTurn = !this.isPlayersTurn;
     } else {
       currentPlayer.score += currentScore;
       this.changeTextContent();
+      this.changeTurnStyle();
     }
   },
 
   hold: function () {
     const currentPlayer = this.getCurrentPlayer();
-    currentPlayer.totalScore += currentPlayer.score;
-    this.changeTextContent();
-    this.playerOne.score = 0;
-    this.playerTwo.score = 0;
-    this.isPlayersTurn = !this.isPlayersTurn;
+    if (currentPlayer.score === 0) {
+      alert(`Please roll first!`);
+    } else {
+      currentPlayer.totalScore += currentPlayer.score;
+      this.changeTextContent();
+      this.playerOne.score = 0;
+      this.playerTwo.score = 0;
+      this.isPlayersTurn = !this.isPlayersTurn;
+      this.changeTurnStyle();
+    }
   },
 
   reset: function () {
@@ -80,6 +89,9 @@ const game = {
     this.changeTextContent();
     this.isPlayersTurn = false;
     midContainer.style.display = `flex`;
+    while (dice.firstChild) {
+      dice.removeChild(dice.firstChild);
+    }
     this.resetStyle();
   },
 
@@ -125,7 +137,6 @@ const playerOneContainer = document.querySelector(`.player1`);
 const playerTwoContainer = document.querySelector(`.player2`);
 
 rollDice.addEventListener(`click`, () => {
-  game.changeTurnStyle();
   game.roll();
   game.winCheck();
 });
@@ -133,7 +144,6 @@ rollDice.addEventListener(`click`, () => {
 const holdBtn = document.querySelector(`.hold-btn`);
 
 holdBtn.addEventListener(`click`, () => {
-  game.changeTurnStyle();
   game.hold();
   game.winCheck();
 });
@@ -141,30 +151,31 @@ holdBtn.addEventListener(`click`, () => {
 const resetBtn = document.querySelector(`.new-game-btn`);
 
 resetBtn.addEventListener(`click`, () => {
-  game.reset();
   closeModal();
+  game.reset();
 });
-
+const dice = document.querySelector(`.dice`);
 const modal = document.getElementById("myModal");
 const closeBtn = document.getElementsByClassName("close")[0];
+const modalP = document.querySelector(
+  `.modal-content > .modal-text-container > p`
+);
 
 const showModal = function (player) {
-  closeModal()
   modal.style.display = "block";
-  const modalP = document.querySelector(
-    `.modal-content > .modal-text-container > p`
-  );
-  const modalText = document.createTextNode(`${player} won! 🎉`);
-  modalP.appendChild(modalText);
+  modalP.textContent = `${player} has won! 🎉`;
 };
 
 const closeModal = function () {
-  closeBtn.onclick = function () {
-    modal.style.display = "none";
-  };
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
+  modal.style.display = "none";
+  modalP.textContent = ``;
+};
+
+closeBtn.onclick = function () {
+  closeModal();
+};
+window.onclick = function (event) {
+  if (event.target == modal) {
+    closeModal();
+  }
 };
