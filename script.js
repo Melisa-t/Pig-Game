@@ -8,7 +8,7 @@ const game = {
   },
 
   createDice: function (score) {
-
+    dice.style.display = `flex`;
     if (dice.hasChildNodes()) {
       const childrenLen = dice.children.length;
       while (dice.firstChild) {
@@ -79,7 +79,6 @@ const game = {
   },
 
   reset: function () {
-    dice.style.display = `flex`;
     const midContainer = document.querySelector(`.mid-container`);
     this.playerOne.totalScore = 0;
     this.playerTwo.totalScore = 0;
