@@ -109,7 +109,7 @@ const game = {
     const midContainer = document.querySelector(`.mid-container`);
     const currentPlayer = this.getCurrentPlayer();
 
-    if (currentPlayer.totalScore + currentPlayer.score >= 10) {
+    if (currentPlayer.totalScore + currentPlayer.score >= 100) {
       currentPlayer.totalScore += currentPlayer.score;
       this.changeTextContent();
       this.winner = currentPlayer;
